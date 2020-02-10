@@ -1,9 +1,13 @@
 package mail;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MailPage {
 
@@ -21,7 +25,9 @@ public class MailPage {
     @FindBy(xpath = ".//div[text()=\"com.epam.automation.mail-test1@tut.by\"]")
     private WebElement log;
     @FindBy(xpath = ".//div[@class=\"b-messages__placeholder-item\"]")
-    private WebElement letters;
+    private WebElement letter;
+
+    List<WebElement> letters = new ArrayList<>();
 
     public MailPage(WebDriver webdriver) {
         PageFactory.initElements(webdriver, this);
@@ -52,11 +58,19 @@ public class MailPage {
     }
 
     public void getLettersInfo(){
-        letters.getText();
+        letter.getText();
     }
 
     public boolean isLettersInfoDisplayed(){
-        return letters.isDisplayed();
+        return letter.isDisplayed();
+    }
+
+    public void getAllLetters(){
+        letters=driver.findElements(By.xpath(".//div[@class=\"b-messages__placeholder-item\"]"));
+        for (WebElement letter: letters
+             ) {
+            System.out.println(letter.getText());
+        }
     }
 
 

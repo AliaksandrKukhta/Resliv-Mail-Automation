@@ -41,6 +41,7 @@ public class MailPageTest {
     @Test
     public void getInfo(){
         mail.getLettersInfo();
+        mail.getAllLetters();
         Assert.assertTrue(mail.isLettersInfoDisplayed());
     }
 
